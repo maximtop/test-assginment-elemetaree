@@ -26,7 +26,8 @@
     "yiisoft/yii2-swiftmailer": "~2.0.0",
     "yiisoft/yii2-httpclient": "*",
     "yiisoft/yii2-debug": "^2.0",
-    "yiisoft/yii2-jui": "*"
+    "yiisoft/yii2-jui": "*",
+    "nesbot/carbon": "^1.22"
 
   },
   "require-dev": {

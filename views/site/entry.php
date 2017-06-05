@@ -5,7 +5,10 @@ use yii\widgets\ActiveForm;
 
 ?>
 
-<?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin([
+        'method' => 'get',
+        'action'
+]); ?>
     <?= $form->field($model, 'name') ?>
     <?= $form->field($model, 'email') ?>
     <div class="form-group">
