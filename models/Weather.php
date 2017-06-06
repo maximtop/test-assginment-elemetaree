@@ -18,6 +18,7 @@ class Weather extends ActiveRecord
         return [
             [['day', 'maxtemp', 'mintemp'], 'required'],
             [['day'], 'date'],
+            [['day'], 'unique'],
             [['maxtemp', 'mintemp'], 'integer'],
         ];
     }

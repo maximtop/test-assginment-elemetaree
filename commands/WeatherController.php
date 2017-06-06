@@ -6,7 +6,6 @@ use app\models\Weather;
 use yii\console\Controller;
 use app\components\WeatherApi;
 use Carbon\Carbon;
-use yii\helpers\Json;
 use \Yii;
 
 class WeatherController extends Controller
@@ -26,12 +25,14 @@ class WeatherController extends Controller
             $end_limit = $start_limit->diffInMonths($end_date, false) > 0 ? $start_date : $end_date;
             $weather = new WeatherApi();
             $weather_history = $weather->getWeatherHistory($start_limit->toDateString(), $end_limit->toDateString());
-//            file_put_contents('weather_array.php', var_export($weather_history, TRUE));
 
             foreach ($weather_history['data']['weather'] as $day) {
-                array_push($weather_history_arr, [$day['date'], $day['maxtempC'], $day['mintempC']]);
+                $weather_history_arr[$day['date']] = [
+                    'date' => $day['date'],
+                    'maxtemp' => $day['maxtempC'],
+                    'mintemp' => $day['mintempC']
+                ];
             };
-
         }
         print_r($weather_history_arr);
         Yii::$app->db
