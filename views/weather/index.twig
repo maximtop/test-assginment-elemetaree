@@ -1,0 +1,49 @@
+{{ use('/Carbon/Carbon') }}
+{% set daysOfWeek = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] %}
+{% for year, months in days %}
+    <h1 class="text-center">{{ year }}</h1>
+    {% for month, days in months %}
+        {% set monthStart = Carbon.create(year, month, 1) %}
+        {% set monthEnd =  Carbon.create(year, month, 1).endOfMonth() %}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th colspan="8" class="text-center">{{ monthStart.format('F Y') }}</th>
+            </tr>
+            <tr>
+                <th>Week</th>
+                {% for dayOfWeek in daysOfWeek %}
+                    <th class="text-center">{{ dayOfWeek }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ monthStart.weekOfYear }}</td>
+                {% set dayOfWeek = monthStart.dayOfWeek == 0 ? 7 : monthStart.dayOfWeek %}
+                {% if dayOfWeek != 1 %}
+                    {% for i in 2..dayOfWeek %}
+                        <td></td>
+                    {% endfor %}
+                {% endif %}
+                {% for day in days %}
+                {% set dayOfMonth = Carbon.parse(day.date) %}
+                <td class="{{ day.class }}">{{ dayOfMonth.format('j M')~ " (" ~day.maxtemp~ " / " ~day.mintemp~ ")" }}</td>
+                {% if (dayOfMonth.dayOfWeek % 7 == 0) and (dayOfMonth.day != monthEnd.day) %}
+            </tr>
+            <tr>
+                <td>{{ dayOfMonth.addDay().weekOfYear }}</td>
+                {% endif %}
+                {% endfor %}
+                {% if monthEnd.dayOfWeek != 0 %}
+                    {% for i in monthEnd.dayOfWeek..6 %}
+                        <td></td>
+                    {% endfor %}
+                {% endif %}
+            </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+{% endfor %}
+
+

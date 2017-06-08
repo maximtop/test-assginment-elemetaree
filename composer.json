@@ -27,7 +27,8 @@
     "yiisoft/yii2-httpclient": "*",
     "yiisoft/yii2-debug": "^2.0",
     "yiisoft/yii2-jui": "*",
-    "nesbot/carbon": "^1.22"
+    "nesbot/carbon": "^1.22",
+    "yiisoft/yii2-twig": "^2.1"
 
   },
   "require-dev": {

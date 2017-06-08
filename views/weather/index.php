@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
+use yii\grid\GridView;
 
 ?>
 
@@ -19,6 +20,13 @@ use yii\widgets\ActiveForm;
     </div>
     <?php ActiveForm::end(); ?>
 </div>
+
+<?php
+foreach ($days as $day) {
+
+}
+?>
+
 
 <!-- TODO find out how to use date range picker -->
 

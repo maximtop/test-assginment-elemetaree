@@ -6,7 +6,26 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+
     'components' => [
+        'view' => [
+            'class' => 'yii\web\View',
+            'renderers' => [
+                'twig' => [
+                    'class' => 'yii\twig\ViewRenderer',
+                    'cachePath' => '@runtime/Twig/cache',
+                    // Array of twig options:
+                    'options' => [
+                        'auto_reload' => true,
+                    ],
+                    'globals' => [
+                        'html' => ['class' => '\yii\helpers\Html'],
+                        'Carbon' => ['class' => '\Carbon\Carbon']
+                    ],
+                    'uses' => ['yii\bootstrap'],
+                ],
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'rjKxQkRn4QvbIaC6HacTbXlNdDy4-3jg',
