@@ -14,10 +14,27 @@ class WeatherController extends Controller
     public function actionIndex()
     {
         $days = Weather::find()
-            ->where(['between','date',  '2016-01-01', '2017-01-31'])
+            ->where(['between','date',  '2016-12-15', '2017-01-15'])
             ->all();
         $calendar = new Calendar();
         $model = new WeatherSearch();
+        $days_array = $calendar->createCalendarFromData($days);
+        return $this->render('index.twig', [
+            'days' => $days_array,
+            'model' => $model
+        ]);
+    }
+
+    public function actionSearch()
+    {
+        $calendar = new Calendar();
+        $model = new WeatherSearch();
+        echo $model->start_date;
+        var_dump($model);
+//        echo $model->start_date;
+        $days = Weather::find()
+            ->where(['between','date',  '2016-12-01', '2017-01-15'])
+            ->all();
         $days_array = $calendar->createCalendarFromData($days);
         return $this->render('index.twig', [
             'days' => $days_array,

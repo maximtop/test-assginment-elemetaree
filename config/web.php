@@ -20,7 +20,9 @@ $config = [
                     ],
                     'globals' => [
                         'html' => ['class' => '\yii\helpers\Html'],
-                        'Carbon' => ['class' => '\Carbon\Carbon']
+                        'Carbon' => ['class' => '\Carbon\Carbon'],
+                        'DatePicker' => ['class' => 'yii\jui\DatePicker'],
+                        'Url' => ['class' => 'yii\helpers\Url'],
                     ],
                     'uses' => ['yii\bootstrap'],
                 ],

@@ -1,4 +1,23 @@
 {{ use('/Carbon/Carbon') }}
+{{ use('yii/widgets/ActiveForm') }}
+
+{% set form = active_form_begin({
+'id' : 'weather-form',
+'method' : 'get',
+'action' : 'search',
+}) %}
+    {{ form.field(model, 'start_date').widget(DatePicker.classname, {
+        'dateFormat': 'yyyy-MM-dd',
+    }) | raw }}
+    {{ form.field(model, 'end_date').widget(DatePicker.classname, {
+        'dateFormat': 'yyyy-MM-dd',
+    }) | raw }}
+
+<div class="form-group">
+    <input type="submit" value="Get Weather Data" class="btn btn-primary"/>
+</div>
+{{ active_form_end() }}
+
 {% set daysOfWeek = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] %}
 {% for year, months in days %}
     <h1 class="text-center">{{ year }}</h1>

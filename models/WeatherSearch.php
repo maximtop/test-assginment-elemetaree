@@ -11,7 +11,6 @@ class WeatherSearch extends Weather
 {
     public $start_date;
     public $end_date;
-    public $date_range;
     public function rules()
     {
         return [
@@ -19,33 +18,4 @@ class WeatherSearch extends Weather
             [['start_date', 'end_date'], 'date'],
         ];
     }
-
-//    public function scenarios()
-//    {
-//       return Model::scenarios();
-//    }
-
-//    public function search($params)
-//    {
-//        $query = Weather::find();
-//
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => $query,
-//        ]);
-//
-//        $this->load($params);
-//
-//        if (!$this->validate()) {
-//            return $dataProvider;
-//        }
-//
-//        $query->andFilterWhere([
-//            'population' => $this->population,
-//        ]);
-//
-//        $query->andFilterWhere(['like', 'code', $this->code])
-//            ->andFilterWhere(['like', 'name', $this->name]);
-//
-//        return $dataProvider;
-//    }
 }
