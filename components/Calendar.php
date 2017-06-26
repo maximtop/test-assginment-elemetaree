@@ -22,9 +22,6 @@ class Calendar
         }
         $days_array_with_ranges = $this->calculateTempRanges($days_array);
         $full_months = $this->getFullMonths($days_array_with_ranges);
-//        echo '<pre>';
-//        print_r($full_months);
-//        echo '</pre>';
         return $full_months;
     }
 
@@ -70,5 +67,3 @@ class Calendar
         return $days_array;
     }
 }
-
-

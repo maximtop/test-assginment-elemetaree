@@ -25,7 +25,6 @@ class WeatherController extends Controller
             $end_limit = $start_limit->diffInMonths($end_date, false) > 0 ? $start_date : $end_date;
             $weather = new WeatherApi();
             $weather_history = $weather->getWeatherHistory($start_limit->toDateString(), $end_limit->toDateString());
-
             foreach ($weather_history['data']['weather'] as $day) {
                 $weather_history_arr[$day['date']] = [
                     'date' => $day['date'],
@@ -34,7 +33,6 @@ class WeatherController extends Controller
                 ];
             };
         }
-        print_r($weather_history_arr);
         Yii::$app->db
             ->createCommand()
             ->batchInsert('weather',
