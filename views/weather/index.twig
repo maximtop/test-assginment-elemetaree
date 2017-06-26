@@ -1,17 +1,20 @@
-{{ use('/Carbon/Carbon') }}
-{{ use('yii/widgets/ActiveForm') }}
+{#{{ use('/Carbon/Carbon') }}#}
+{#{{ use('yii/widgets/ActiveForm') }}#}
 
 {% set form = active_form_begin({
 'id' : 'weather-form',
 'method' : 'get',
-'action' : 'search',
+'action' : Url.to({0 : 'weather/search'}),
 }) %}
-    {{ form.field(model, 'start_date').widget(DatePicker.classname, {
+<div class="row">
+{{ form.field(model, 'start_date').widget(DatePicker.classname, {
         'dateFormat': 'yyyy-MM-dd',
     }) | raw }}
+    &nbsp;
     {{ form.field(model, 'end_date').widget(DatePicker.classname, {
         'dateFormat': 'yyyy-MM-dd',
     }) | raw }}
+</div>
 
 <div class="form-group">
     <input type="submit" value="Get Weather Data" class="btn btn-primary"/>
@@ -47,7 +50,7 @@
                 {% endif %}
                 {% for day in days %}
                 {% set dayOfMonth = Carbon.parse(day.date) %}
-                <td class="{{ day.class }}">{{ dayOfMonth.format('j M')~ " (" ~day.maxtemp~ " / " ~day.mintemp~ ")" }}</td>
+                <td class="{{ day.class }}">{{ dayOfMonth.format('j M') }} {{ day.maxtemp ? " (" ~day.maxtemp~ " / " ~day.mintemp~ ")" }}</td>
                 {% if (dayOfMonth.dayOfWeek % 7 == 0) and (dayOfMonth.day != monthEnd.day) %}
             </tr>
             <tr>

@@ -6,34 +6,7 @@ use Carbon\Carbon;
 
 class Calendar
 {
-
-    public function createCalendar($date = null)
-    {
-        $daysOfWeek = array('Mon','Tue','Wed','Thu','Fri','Sat','Sun');
-        $date = is_null($date) ? Carbon::now() : Carbon::parse($date);
-        $month = $date->month;
-        $firstDayOfMonth = $date->startOfMonth();
-        $dayOfWeek = $firstDayOfMonth->dayOfWeek;
-        $table = "<table class='table table-bordered'><thead><tr><th colspan='8' class='text-center'>{$date->format('F')}</th></tr><tr><th>Week</th>" . array_reduce($daysOfWeek,
-                function($acc, $item) {return $acc .= "<th>{$item}</th>";}, "") ."</tr></thead>";
-        $table .= "<tbody><td>{$date->format('W')}</td>";
-        for($i = 0; $i < $dayOfWeek - 1; $i++) {
-            $table .= "<td></td>";
-        }
-        while ($date->month == $month) {
-            $table .= "<td>{$date->format('j M')}</td>";
-            if($date->dayOfWeek % 7 == 0) {
-                $table .= "</tr><tr><td>" . ($date->format('W') + 1) . "</td>";
-            }
-            $date->addDay();
-        }
-        for($i = $date->dayOfWeek; $i <= 7; $i++) {
-            $table .= "<td></td>";
-        }
-        return $table . '</tbody></table>';
-    }
-
-    public function createCalendarFromData(array $days = null)
+    public function prepareDataFromDatabase(array $days = null)
     {
         $days_array = [];
         foreach ($days as $day) {
@@ -45,50 +18,57 @@ class Calendar
                 'maxtemp' => $maxtemp,
                 'mintemp' => $mintemp,
                 'range' => abs($maxtemp - $mintemp)
-                ];
+            ];
         }
+        $days_array_with_ranges = $this->calculateTempRanges($days_array);
+        $full_months = $this->getFullMonths($days_array_with_ranges);
+//        echo '<pre>';
+//        print_r($full_months);
+//        echo '</pre>';
+        return $full_months;
+    }
+
+    public function calculateTempRanges($days_array)
+    {
         foreach ($days_array as $year => $months) {
             foreach ($months as $month => $days) {
                 $max_range = max(array_column($days, 'range'));
                 $avg_range = array_sum(array_column($days, 'range')) / count($days);
                 foreach ($days as $date => $day) {
-                    if($day['range'] == $max_range) {
+                    if ($day['range'] == $max_range) {
                         $days_array[$year][$month][$date]['class'] = 'max-range';
-                    } else if ($day['range'] >= $avg_range) {
-                        $days_array[$year][$month][$date]['class'] = 'avg-range';
+                    } else {
+                        if ($day['range'] >= $avg_range) {
+                            $days_array[$year][$month][$date]['class'] = 'avg-range';
+                        }
                     }
                 }
             }
         }
         return $days_array;
-
     }
 
-//    public function createCalendar($date = null)
-//    {
-//        $daysOfWeek = array('Mon','Tue','Wed','Thu','Fri','Sat','Sun');
-//        $date = is_null($date) ? Carbon::now() : Carbon::parse($date);
-//        $month = $date->month;
-//        $firstDayOfMonth = $date->startOfMonth();
-//        $dayOfWeek = $firstDayOfMonth->dayOfWeek;
-//        $table = "<table class='table table-bordered'><thead><tr><th colspan='8' class='text-center'>{$date->format('F')}</th></tr><tr><th>Week</th>" . array_reduce($daysOfWeek,
-//                function($acc, $item) {return $acc .= "<th>{$item}</th>";}, "") ."</tr></thead>";
-//        $table .= "<tbody><td>{$date->format('W')}</td>";
-//        for($i = 0; $i < $dayOfWeek - 1; $i++) {
-//            $table .= "<td></td>";
-//        }
-//        while ($date->month == $month) {
-//            $table .= "<td>{$date->format('j M')}</td>";
-//            if($date->dayOfWeek % 7 == 0) {
-//                $table .= "</tr><tr><td>" . ($date->format('W') + 1) . "</td>";
-//            }
-//            $date->addDay();
-//        }
-//        for($i = $date->dayOfWeek; $i <= 7; $i++) {
-//            $table .= "<td></td>";
-//        }
-//        return $table . '</tbody></table>';
-//    }
+    public function getFullMonths($days_array)
+    {
+        foreach ($days_array as $year => $months) {
+            foreach ($months as $month => $days) {
+                $monthDay = Carbon::create($year, $month, 1);
+                while($monthDay->month == $month) {
+                    $day = $monthDay->day;
+                    if(isset($days[$day])) {
+                        $days_array[$year][$month][$day] = $days[$day];
+                    } else {
+                        $days_array[$year][$month][$day] = [
+                            'date' => $monthDay->toDateString()
+                        ];
+                    }
+                    $monthDay->addDay();
+                }
+                ksort($days_array[$year][$month]);
+            }
+        }
+        return $days_array;
+    }
 }
 
 
