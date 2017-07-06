@@ -1,38 +1,11 @@
-Yii 2 Basic Project Template
-============================
+## Weather Calendar Rendering Test Task From Elementaree Company
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
+[![Code Climate](https://codeclimate.com/github/maximtop/ee-test-task/badges/gpa.svg)](https://codeclimate.com/github/maximtop/ee-test-task)
+[![Issue Count](https://codeclimate.com/github/maximtop/ee-test-task/badges/issue_count.svg)](https://codeclimate.com/github/maximtop/ee-test-task)
+[![Test Coverage](https://codeclimate.com/github/maximtop/ee-test-task/badges/coverage.svg)](https://codeclimate.com/github/maximtop/ee-test-task/coverage)
+[![Build Status](https://travis-ci.org/maximtop/ee-test-task.svg?branch=master)](https://travis-ci.org/maximtop/ee-test-task)
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
-
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-basic/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-basic/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
-
-DIRECTORY STRUCTURE
--------------------
-
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
-
-
-
-REQUIREMENTS
-------------
-
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+This test task description is available [here](https://docs.google.com/spreadsheets/d/1kcn2QQs2oSfg-7STnvGffqta_-c-yM0fzmKbzTUYRss/edit?usp=sharing)
 
 
 INSTALLATION
@@ -46,7 +19,7 @@ at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 You can then install this project template using the following command:
 
 ~~~
-php composer.phar global require "fxp/composer-asset-plugin:^1.2.0"
+php composer.phar global require "fxp/composer-asset-plugin:^1.3.1"
 php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
 ~~~
 
@@ -56,28 +29,6 @@ directly under the Web root.
 ~~~
 http://localhost/basic/web/
 ~~~
-
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
-
-You can then access the application through the following URL:
-
-~~~
-http://localhost/basic/web/
-~~~
-
 
 CONFIGURATION
 -------------
@@ -143,7 +94,23 @@ To execute acceptance tests do the following:
 
     ```
     java -jar ~/selenium-server-standalone-x.xx.x.jar
+    ```
+
+    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
+
+    ```
+    # for Firefox
+    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
+    
+    # for Google Chrome
+    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
     ``` 
+    
+    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
+    
+    ```
+    docker run --net=host selenium/standalone-firefox:2.53.0
+    ```
 
 5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
 
