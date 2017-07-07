@@ -12,7 +12,7 @@ class WeatherController extends Controller
     public function actionIndex($start_date = null, $end_date = null)
     {
         $end_date = is_null($end_date) ? Carbon::now() : Carbon::parse($end_date);
-        $start_date = is_null($start_date) ? $end_date->copy()->subMonths(2) : Carbon::parse($start_date);
+        $start_date = is_null($start_date) ? $end_date->copy()->subYears(2) : Carbon::parse($start_date);
 
         echo $end_date . "\n";
         echo $start_date . "\n";

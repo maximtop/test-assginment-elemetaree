@@ -1,36 +1,31 @@
-## Weather Calendar Rendering Test Task From Elementaree Company
+# Elementaree company test task
 
 [![Code Climate](https://codeclimate.com/github/maximtop/ee-test-task/badges/gpa.svg)](https://codeclimate.com/github/maximtop/ee-test-task)
 [![Issue Count](https://codeclimate.com/github/maximtop/ee-test-task/badges/issue_count.svg)](https://codeclimate.com/github/maximtop/ee-test-task)
 [![Test Coverage](https://codeclimate.com/github/maximtop/ee-test-task/badges/coverage.svg)](https://codeclimate.com/github/maximtop/ee-test-task/coverage)
 [![Build Status](https://travis-ci.org/maximtop/ee-test-task.svg?branch=master)](https://travis-ci.org/maximtop/ee-test-task)
 
-This test task description is available [here](https://docs.google.com/spreadsheets/d/1kcn2QQs2oSfg-7STnvGffqta_-c-yM0fzmKbzTUYRss/edit?usp=sharing)
+### Description
+Project able to get and save data from weather api and then render weather data as an calendar
 
+Whole test task description you can find [here](https://docs.google.com/spreadsheets/d/1kcn2QQs2oSfg-7STnvGffqta_-c-yM0fzmKbzTUYRss/edit?usp=sharing)
 
-INSTALLATION
-------------
+Installation
+============
 
-### Install via Composer
+### Requirements
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+- Composer
+- Makefile
+- MySQL
+- PHP 5.4 or above. Ideally latest PHP 7
 
-You can then install this project template using the following command:
+### Project downloading
 
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:^1.3.1"
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
+$ git clone https://github.com/maximtop/test-elemetaree.git test-elementaree
+$ cd test-elementaree
 
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-CONFIGURATION
+Configuration
 -------------
 
 ### Database
@@ -49,111 +44,28 @@ return [
 
 **NOTES:**
 - Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
 
+### Api Key
 
+Edit the file `components/WeatherApi.php` with real api key from https://developer.worldweatheronline.com/my/:
 
-TESTING
--------
-
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
-
-- `unit`
-- `functional`
-- `acceptance`
-
-Tests can be executed by running
-
-```
-vendor/bin/codecept run
-``` 
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
-
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
-    
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
-
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
-
-
-6. Start web server:
-
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
-
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
-
-```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
+```{
+    private $api_key = 'your_api_key_here';
 ```
 
-You can see code coverage output under the `tests/_output` directory.
+### Installing
+
+As you can see in Makefile this command installs all composer dependencies and migrate database structure
+
+If there is no errors than run command
+```
+make weather
+```
+this command will supply our database with data from our weaher api
+
+No in order to run local server print in your terminal
+```
+make serve
+```
+After this you will be able to get weather data by the url
+localhost:8080/index.php?r=weather
