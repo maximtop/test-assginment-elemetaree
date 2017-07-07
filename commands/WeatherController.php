@@ -2,7 +2,6 @@
 
 namespace app\commands;
 
-use app\models\Weather;
 use yii\console\Controller;
 use app\components\WeatherApi;
 use Carbon\Carbon;
