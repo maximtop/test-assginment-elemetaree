@@ -1,10 +1,5 @@
 # Elementaree company test task
 
-[![Code Climate](https://codeclimate.com/github/maximtop/ee-test-task/badges/gpa.svg)](https://codeclimate.com/github/maximtop/ee-test-task)
-[![Issue Count](https://codeclimate.com/github/maximtop/ee-test-task/badges/issue_count.svg)](https://codeclimate.com/github/maximtop/ee-test-task)
-[![Test Coverage](https://codeclimate.com/github/maximtop/ee-test-task/badges/coverage.svg)](https://codeclimate.com/github/maximtop/ee-test-task/coverage)
-[![Build Status](https://travis-ci.org/maximtop/ee-test-task.svg?branch=master)](https://travis-ci.org/maximtop/ee-test-task)
-
 ### Description
 Project able to get and save data from weather api and then render weather data as an calendar
 
