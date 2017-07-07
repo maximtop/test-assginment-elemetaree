@@ -21,9 +21,10 @@ Installation
 - PHP 5.4 or above. Ideally latest PHP 7
 
 ### Project downloading
-
+```
 $ git clone https://github.com/maximtop/test-elemetaree.git test-elementaree
 $ cd test-elementaree
+```
 
 Configuration
 -------------
@@ -55,17 +56,21 @@ Edit the file `components/WeatherApi.php` with real api key from https://develop
 
 ### Installing
 
+After that you can install app by running in your terminal command
+```
+$ make install
+```
 As you can see in Makefile this command installs all composer dependencies and migrate database structure
 
-If there is no errors than run command
+If there is no errors than you can run command
 ```
-make weather
+$ make weather
 ```
 this command will supply our database with data from our weaher api
 
-No in order to run local server print in your terminal
+Now in order to run local server print in your terminal
 ```
-make serve
+$ make serve
 ```
 After this you will be able to get weather data by the url
 localhost:8080/index.php?r=weather
