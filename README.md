@@ -4,6 +4,7 @@
 Project able to get and save data from weather api and then render weather data as an calendar
 
 Whole test task description you can find [here](https://docs.google.com/spreadsheets/d/1kcn2QQs2oSfg-7STnvGffqta_-c-yM0fzmKbzTUYRss/edit?usp=sharing)
+![alt text](https://www.dropbox.com/s/1v9ea2sr2ekhlw5/Selection_033.png?dl=1 "Weather rendering in calendar")
 
 Installation
 ============
