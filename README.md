@@ -4,7 +4,7 @@
 Project able to get and save data from weather api and then render weather data in an calendar. It also marks the day of month which has the max temperature amplitude with red color. And days with temperature above the average month ampltitude with yellow color.
 
 Whole test task description you can find [here](https://docs.google.com/spreadsheets/d/1kcn2QQs2oSfg-7STnvGffqta_-c-yM0fzmKbzTUYRss/edit?usp=sharing)
-![alt text](https://www.dropbox.com/s/1v9ea2sr2ekhlw5/Selection_033.png?dl=1 "Weather rendering in calendar")
+![alt text](https://www.dropbox.com/s/ygdroxwonali29q/Selection_033.png?dl=1 "Weather rendering in calendar")
 
 Installation
 ============
