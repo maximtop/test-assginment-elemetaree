@@ -17,6 +17,7 @@ class m170605_080439_create_weather_table extends Migration
             'date' => $this->date(),
             'mintemp' => $this->integer(),
             'maxtemp' => $this->integer(),
+            'city' => $this->string(),
         ]);
     }
 
