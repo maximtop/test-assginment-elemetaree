@@ -7,13 +7,13 @@ use yii\httpclient\Client;
 
 class WeatherApi
 {
-    private $api_key = '';
-    public $city = 'Moscow';
+    private $api_key = 'be6e247bbbac4c86bef91004170707';
     public $base_url = 'http://api.worldweatheronline.com/premium/v1/past-weather.ashx';
     public $time_period = '24';
     public $format = 'json';
 
-    public function getWeatherHistory($start_date, $end_date)
+
+    public function getWeatherHistory($city, $start_date, $end_date)
     {
         $client = new Client();
         $response = $client->createRequest()
@@ -21,7 +21,7 @@ class WeatherApi
             ->setUrl($this->base_url)
             ->setData([
                 'key' => $this->api_key,
-                'q' => $this->city,
+                'q' => $city,
                 'format' => $this->format,
                 'date' => $start_date,
                 'enddate' => $end_date,
